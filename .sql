@@ -36,3 +36,14 @@ ORDER BY "maximumSalary";
 -- BÔNUS
 
 
+SELECT s.name as school,
+c.name as course,
+COUNT(e.id) as "studentCount",
+e.status
+FROM educations e
+JOIN schools s ON s.id=e."schoolId"
+JOIN courses c ON c.id=e."courseId"
+WHERE e.status='finished' OR e.status='ongoing'
+GROUP BY c.id,s.id,e.status
+ORDER BY "studentCount" DESC
+LIMIT 3
